@@ -1,0 +1,20 @@
+{
+  "/": {
+    "/docs": 80,
+    "/resources": 20
+  },
+  "/docs": {
+    "/": 20,
+    "/community": 0,
+    "/resources": 80
+  },
+  "/resources": {
+    "/": 20,
+    "/community": 80
+  },
+  "/community": {
+    "/": 33,
+    "/resources": 33,
+    "/docs": 34
+  }
+}

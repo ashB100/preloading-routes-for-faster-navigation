@@ -1,32 +1,79 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
+    <header>
+      <h1>Preloading Routes for Faster Navigation</h1>
+    </header>
+
+    <app-nav></app-nav>
+
+    <main>
+      <router-outlet>
+        <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
+      </router-outlet>
+    </main>
+
+    <footer>
+      <p>iJS Conference London - By Ashnita Bali</p>
+    </footer>
   `,
-  styles: []
+  styles: [`
+    :host {
+      text-align: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      background-image: url('https://images.unsplash.com/38/L2NfDz5SOm7Gbf755qpw_DSCF0490.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');
+      background-position: bottom;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-weight: lighter;
+      font-size: 1.5em;
+      margin: 0;
+    }
+
+    main {
+      background-color: rgba(200, 130, 30, 0.3);
+      height: 100%;
+      padding: 2em;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+  `],
 })
 export class AppComponent {
-  title = 'preloading-app';
+  loading = false;
+
+  constructor(router: Router) {
+    router.events.subscribe(
+      (event: RouterEvent): void => {
+        if (event instanceof NavigationStart) {
+          this.loading = true;
+        } else if (event instanceof NavigationEnd) {
+          this.loading = false;
+        }
+      },
+    );
+  }
+
 }
