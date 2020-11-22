@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-community',
   template: `
-    <div class="card">
-      community works!
-    </div>
+    <div>community works!</div>
   `,
   styles: [
   ]

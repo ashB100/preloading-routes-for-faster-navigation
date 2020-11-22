@@ -4,27 +4,27 @@ import { HoverService } from '../hover.service';
 @Component({
   selector: 'app-nav',
   template: `
-      <nav>
-          <a routerLink="/home" routerLinkActive="active">Home</a>
-          <a routerLink="/docs" routerLinkActive="active" (mouseover)="preloadRoute('docs')">Docs</a>
-          <a routerLink="/resources" routerLinkActive="active" (mouseover)="preloadRoute('resources')">Resources</a>
+    <nav>
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+        <a routerLink="/docs" routerLinkActive="active" (mouseover)="preloadRoute('docs')">Docs</a>
+        <a routerLink="/resources" routerLinkActive="active" (mouseover)="preloadRoute('resources')">Resources</a>
 
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>menu</mat-icon>
-          </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>menu</mat-icon>
+        </button>
 
-          <mat-menu #menu="matMenu">
-              <button mat-menu-item color="accent">
-                  <a routerLink="/featureA">Feature A</a>
-              </button>
-              <button mat-menu-item color="accent">
-                  <a routerLink="/featureB">Feature B</a>
-              </button>
-              <button mat-menu-item color="accent">
-                  <a routerLink="/featureC">Feature C</a>
-              </button>
-          </mat-menu>
-      </nav>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item color="accent">
+                <a routerLink="/featureA" (mouseover)="preloadRoute('featureA')">Feature A</a>
+            </button>
+            <button mat-menu-item color="accent">
+                <a routerLink="/featureB" (mouseover)="preloadRoute('featureB')">Feature B</a>
+            </button>
+            <button mat-menu-item color="accent">
+                <a routerLink="/featureC">Feature C</a>
+            </button>
+        </mat-menu>
+    </nav>
   `,
   styles: [`
       nav {
@@ -44,7 +44,7 @@ import { HoverService } from '../hover.service';
           color: inherit;
           padding: 0.2em 0.4em;
           box-shadow: 0 0 0 goldenrod;
-          transition: box-shadow 0.3s ease-in;
+          transition: box-shadow 0.1s ease-in;
       }
 
       a.active {

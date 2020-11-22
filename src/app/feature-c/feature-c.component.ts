@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-feature-c',
   template: `
-    <div class="card">
+    <div>
       feature-c works!
     </div>
   `,

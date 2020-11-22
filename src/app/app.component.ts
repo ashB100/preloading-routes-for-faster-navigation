@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,27 +11,24 @@ import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/ro
     <app-nav></app-nav>
 
     <main>
-      <router-outlet>
-        <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
-      </router-outlet>
+      <router-outlet></router-outlet>
+      <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
     </main>
 
     <footer>
-      <p>iJS Conference London - By Ashnita Bali</p>
+      <p>By @ashnita01</p>
     </footer>
   `,
   styles: [`
-    :host {
-      text-align: center;
-    }
-
     header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100px;
-      background-image: url('https://images.unsplash.com/38/L2NfDz5SOm7Gbf755qpw_DSCF0490.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');
-      background-position: bottom;
+      font-size: 1.5em;
+      text-align: center;
+      padding-top: 1em;
+      height: 150px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)),
+      url('https://images.unsplash.com/photo-1596213252411-8b1ebcac67ba?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjh8fGtpdHRlbnN8ZW58MHx8MHw%3D&auto=format&fit=crop&w=700&q=60')
+      ;
+      background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
     }
@@ -47,11 +44,16 @@ import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/ro
       background-color: rgba(200, 130, 30, 0.3);
       height: 100%;
       padding: 2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
     }
 
     footer {
       background-color: var(--primary-color);
       color: white;
+      text-align: center;
       padding: 1em 0;
     }
 
@@ -69,11 +71,12 @@ export class AppComponent {
       (event: RouterEvent): void => {
         if (event instanceof NavigationStart) {
           this.loading = true;
-        } else if (event instanceof NavigationEnd) {
+        } else if (event instanceof NavigationEnd ||
+            event instanceof NavigationCancel || 
+            event instanceof NavigationError) {
           this.loading = false;
         }
       },
     );
   }
-
 }

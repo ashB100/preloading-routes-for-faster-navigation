@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { HoverService } from '../hover.service';
 
 @Component({
   selector: 'app-resources',
   template: `
-    <div class="card">
+    <div>
       <p>
         resources works!
       </p>
 
       <nav>
-        <a mat-stroked-button color="primary" routerLink="/community">Community</a>
+        <a mat-raised-button 
+          color="accent" 
+          routerLink="/community"
+          (mouseover)="hoverService.hover('community')">Community</a>
       </nav>
 
     </div>
@@ -23,7 +27,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResourcesComponent implements OnInit {
 
-  constructor() {
+  constructor(public hoverService: HoverService) {
   }
 
   ngOnInit(): void {

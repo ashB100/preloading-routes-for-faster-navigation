@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-docs',
   template: `
-    <div class="card">
+    <div>
       docs works!
     </div>
   `,
