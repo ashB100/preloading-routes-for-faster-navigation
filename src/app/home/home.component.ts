@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HoverService } from '../hover.service';
+import { PreloadSelectedModules } from '../preload-selected.service';
+import { QuicklinkStrategy } from 'ngx-quicklink';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +12,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [],
 })
-export class HomeComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
-}
+export class HomeComponent {}

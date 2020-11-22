@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 
+import { HomeComponent } from './home/home.component';
+
 import { PreloadSelectedModules } from './preload-selected.service';
 import { QuicklinkStrategy } from 'ngx-quicklink';
 import { PreloadHoveredModules } from './preload-hovered.service';
-import { HomeComponent } from './home/home.component';
+import { HoverService } from './hover.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -25,9 +27,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadHoveredModules }),
+    RouterModule.forRoot(routes, { preloadingStrategy: QuicklinkStrategy }),
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

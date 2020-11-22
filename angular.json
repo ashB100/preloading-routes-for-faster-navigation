@@ -39,11 +39,8 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "./extend.webpack.config.js"
-            },
             "outputPath": "dist/preloading-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -106,6 +103,14 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "preloading-app:build"
+          }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/preloading-app",
+            "netlifyToken": "WUw-we2iP_hGum1S8qGT576qZQCaeBSGVf8YetGxyLI",
+            "siteId": "018ebc60-ae6d-4352-a6c9-e2e33d3dc10c"
           }
         }
       }
